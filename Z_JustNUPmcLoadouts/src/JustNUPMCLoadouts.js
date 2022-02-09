@@ -5,7 +5,7 @@ class JustNUPMCLoadouts
 	static onLoadMod()
 	{
 		// Constants
-		const Config = JsonUtil.deserialize(VFS.readFile(`user/mods/Z_JustNUPmcLoadouts/config/config.json`));
+		const Config = require("../config/config.json");
 		const Items = DatabaseServer.tables.templates.items;
 		const Bots = DatabaseServer.tables.bots.types;
 		const HeadWearMaxLevel = (Config.HeadwearMaxLevel + 1)
