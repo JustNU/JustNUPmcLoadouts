@@ -217,9 +217,15 @@ class Mod {
 						bots[botType].inventory.items.TacticalVest.push(itemId);
 						bots[botType].inventory.items.Pockets.push(itemId);
 					}
-					// ammo
+					
+					
+					// handle ammo
 					if (Items[itemId]._parent === "5485a8684bdc2da71d8b4567") {
-						bots[botType].inventory.items.SecuredContainer.push(itemId);
+						if (!bots[botType].inventory.Ammo[Items[itemId]._props.Caliber]) {
+							bots[botType].inventory.Ammo[Items[itemId]._props.Caliber] = {};
+						}
+						
+						bots[botType].inventory.Ammo[Items[itemId]._props.Caliber][itemId] = 1;
 					}
 				}
 				
@@ -320,14 +326,13 @@ class Mod {
 				*/
 				
 				// chances
-				/*
 				for (const equipment in bots[botType].chances.equipment) {
 					if (equipment === "ArmorVest" || equipment === "Headwear" || equipment === "FirstPrimaryWeapon") {
 						bots[botType].chances.equipment[equipment] = 99;
 					} else if (equipment === "TacticalVest" || equipment === "Scabbard") {
 						bots[botType].chances.equipment[equipment] = 100;
 					} else if (equipment === "SecondPrimaryWeapon") {
-						bots[botType].chances.equipment[equipment] = 10;
+						bots[botType].chances.equipment[equipment] = 0;
 					} else {
 						bots[botType].chances.equipment[equipment] = 50;
 					}
@@ -354,7 +359,6 @@ class Mod {
 						bots[botType].chances.mods[mods] = 99;
 					}
 				}
-				*/
 				
 				
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.Headwear) + " - Headwear" + " " + botType)
@@ -364,7 +368,7 @@ class Mod {
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.Eyewear) + " - Eyewear")
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.ArmBand) + " - ArmBand")
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.TacticalVest) + " - TacticalVest")
-				//logger.info(bots[botType].inventory.equipment.FirstPrimaryWeapon)
+				//logger.info(bots[botType].inventory.Ammo)
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.SecondPrimaryWeapon) + " - SecondPrimaryWeapon")
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.Holster) + " - Holster")
 				//logger.logInfo(common_f.json.serialize(bots[botType].inventory.equipment.Scabbard) + " - Scabbard")
